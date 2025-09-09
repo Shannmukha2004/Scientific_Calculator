@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CALCULATOR</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f0f0f0;
+    }
+    .calculator {
+      width: 500px;
+      background: rgb(246, 192, 192);
+      padding-top: 30px;
+      padding-bottom:30px ;
+      padding-left: 85px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: auto;
+    }
+    input[type="text"] {
+      width: 83%;
+      font-size: 24px;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    .buttons button {
+      width: 20%;
+      padding: 15px;
+      font-size: 18px;
+      margin: 2px 0;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled />
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="appendValue('(')">(</button>
+      <button onclick="appendValue(')')">)</button>
+      <button onclick="appendValue('/')">/</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('*')">*</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('-')">-</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('+')">+</button>
+
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="deleteLast()">⌫</button>
+
+      <!-- New row for scientific operations -->
+      <button onclick="power()">x^y</button>
+      <button onclick="squareRoot()">√</button>
+      <button onclick="logarithm()">log</button>
+      <button onclick="tenPowerX()">10^x</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = 'Error';
+      }
+    }
+
+    // Extra operations
+    function power() {
+      display.value += "**"; // example: 2**3 = 8
+    }
+
+    function squareRoot() {
+      try {
+        display.value = Math.sqrt(eval(display.value));
+      } catch {
+        display.value = 'Error';
+      }
+    }
+
+    function logarithm() {
+      try {
+        display.value = Math.log10(eval(display.value));
+      } catch {
+        display.value = 'Error';
+      }
+    }
+
+    function tenPowerX() {
+      try {
+        display.value = Math.pow(10, eval(display.value));
+      } catch {
+        display.value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
